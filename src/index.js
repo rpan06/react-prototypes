@@ -14,7 +14,7 @@ function greeting(props){
     return (
         <div>
             <h1>Hello {props.name}</h1>
-            <h2 class="text-muted">Your lucky number is {props.luckyNumber}</h2>
+            <h2 className="text-muted">Your lucky number is {props.luckyNumber}</h2>
         </div>
     )
 }
