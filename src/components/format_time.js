@@ -17,8 +17,14 @@ export class FormatTime extends Component {
             width: '383px'
         }
     }
+    componentWillMount(){
+        this.formatTime(this.props)
+    }
     componentWillReceiveProps(nextProps){
-        const {elapsed} = nextProps;
+        this.formatTime(nextProps);
+    }
+    formatTime(time){
+        const {elapsed} = time;
         const sec = elapsed/1000;
         const min = sec/60;
         this.setState({

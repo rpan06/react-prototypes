@@ -1,5 +1,5 @@
 import React from 'react';
-import Stopwatch from './stopwatch'
+import Stopwatch from './stopwatch';
 
 export const App = () => (
     <div className='container'>

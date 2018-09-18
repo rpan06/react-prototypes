@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {FormatTime} from './format_time'
+import LapTimes from './laptimes'
 
 class Stopwatch extends Component {
     constructor(props){
@@ -7,7 +8,8 @@ class Stopwatch extends Component {
         this.state = {
             status: 'stopped',
             start: null,
-            elapsed: 0
+            elapsed: 0,
+            history: [],
         }
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
@@ -27,10 +29,12 @@ class Stopwatch extends Component {
         setTimeout(this.update, 10);
     }
     stop(){
+        const {history, elapsed} = this.state
         this.setState({
-            status: 'stopped'
+            status: 'stopped',
+            history: [<FormatTime key={Math.floor(Math.random()*1000)} elapsed={elapsed}/>, ...this.state.history]
         })
-
+        console.log(history)
     }
     update(){
         const {status, start} = this.state;
@@ -49,17 +53,26 @@ class Stopwatch extends Component {
         })
     }
     render(){
-        const {elapsed, status} = this.state;
+        const {elapsed, status, history} = this.state;
         return (
-            <div className="jumbotron">
-                <h1 className="display-3"><FormatTime elapsed={elapsed}/></h1>
-                <hr className="my-3"/>
-                <p className="lead text-center">{status}</p>
-                <p className="text-center">
-                    <button className="btn btn-outline-success mx-3" onClick={this.start}>Start</button>
-                    <button className="btn btn-outline-danger mx-3" onClick={this.stop}>Stop</button>
-                    <button className="btn btn-outline-warning mx-3" onClick={this.reset}>Reset</button>
-                </p>
+            <div>
+                <div className="jumbotron">
+                    <h1 className="display-3"><FormatTime elapsed={elapsed}/></h1>
+                    <hr className="my-3"/>
+                    <p className="lead text-center">{status}</p>
+                    <p className="text-center">
+                        <button className="btn btn-outline-success mx-3" onClick={this.start}>Start</button>
+                        <button className="btn btn-outline-danger mx-3" onClick={this.stop}>Stop</button>
+                        <button className="btn btn-outline-warning mx-3" onClick={this.reset}>Reset</button>
+                    </p>
+                </div>
+                <div className="jumbotron">
+                    <h1 className="text-center">Lap Times</h1>
+                    <div>
+                        <h1 className="display-4">{history}</h1>
+                    </div>
+
+                </div>
             </div>
         )
     }
