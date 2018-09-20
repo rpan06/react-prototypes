@@ -30,9 +30,9 @@ export class ContactForm extends Component {
     }
     handleSubmit = (event) =>{
         event.preventDefault();
-        if(this.checkEmptyValues){
-            alert("All inputs must be filled!");
-        } else {
+        // if(this.checkEmptyValues){
+        //     alert("All inputs must be filled!");
+        // } else {
             this.props.add(this.state.form)
             this.setState({
                 form: {
@@ -42,7 +42,7 @@ export class ContactForm extends Component {
                     email: ''
                 }
             })
-        }
+        //}
     }
     checkEmptyValues(){
         const {firstName, lastName, phone, email} = this.state.form;
